@@ -11,21 +11,11 @@ Get user input to add topics
 
 */
 
-
-
-var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&limit=10&q=monkeys";
-
-$.ajax({
-    url: queryURL,
-    method: 'GET'
-}).done(function(response) {
-    console.log(response);
-});
-
 var giftastic = {
     initialize: function(){
         this.displayTopics();
         this.addTopic();
+        this.getButtonClicks();
     },
 
     topicsArray: [
@@ -66,6 +56,30 @@ var giftastic = {
                 $("#topic-buttons").append(buttonObject); //ads button object to document
                 $("#topic-input").val("");
             }
+        });
+    },
+
+    callGiphy: function( query ){
+        var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&limit=10&q="
+         + query;
+         console.log(queryURL);
+        
+        $.ajax({
+            url: queryURL,
+            method: 'GET'
+        }).done(function(response) {
+            for(var i=0; i<response.data.length; i++){
+                console.log(response.data[i].slug);
+            }
+            console.log(response); //display gifs
+        });
+    },
+
+    getButtonClicks: function(){
+        $(".topic-button").on("click", function(){
+            var topic = $(this).attr("data-topic"); //get topic from clicked button
+            
+            giftastic.callGiphy(topic); //use ajax to query Giphy API
         });
     },
 };
