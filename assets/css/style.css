@@ -1,0 +1,24 @@
+.gif-container {
+    float: left;
+    margin-right: 24px;
+    margin-bottom: 24px;
+    cursor: pointer;
+}
+
+button.topic-button {
+    float: left;
+    margin-right: 12px;
+    margin-bottom: 12px;
+    font-size: 120%;
+}
+
+#topic-input,
+#add-topic{
+    width: 50%;
+    float: left;
+}
+
+.rating{
+    text-align: center;
+    font-size:130%;
+}
